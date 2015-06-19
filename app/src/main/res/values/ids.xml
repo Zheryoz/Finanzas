@@ -3,4 +3,10 @@
     <item name="user" type="id" />
     <item name="password" type="id" />
     <item name="signin" type="id" />
+    <item name="imagen" type="id" />
+    <item name="descripcion" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="tv_telefono" type="id" />
+    <item name="tv_correo" type="id" />
+    <item name="tv_web" type="id" />
 </resources>

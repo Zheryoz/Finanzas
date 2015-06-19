@@ -12,4 +12,17 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="acerca_de">Acerca de la aplicación</string>
+    <string name="contactenos">Contáctenos</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pretium tempus rhoncus. Fusce auctor ex eget tortor efficitur gravida id sed ante. Praesent a accumsan lectus, sit amet volutpat lorem. Cras blandit lorem quis massa rutrum pharetra. Mauris eget euismod ante, vitae finibus leo. Suspendisse porttitor est id nisl finibus, sit amet ullamcorper elit malesuada. Donec dictum, nibh vitae vestibulum tempus, libero sapien condimentum odio, in ornare ante enim ac nisl. Curabitur finibus, eros a euismod molestie, erat mi congue ex, at convallis magna felis non justo. Praesent vestibulum ex at est pharetra, et placerat mauris suscipit.</string>
+    <string name="title_activity_contactenos">ContactenosActivity</string>
+    <string name="telefono_numero">(+51) 999 476 538</string>
+    <string name="telefono">Teléfono</string>
+    <string name="email_texto">plandepago@finan.pe</string>
+    <string name="email_contacto">Correo electrónico</string>
+    <string name="paginaweb_texto">www.plandepago.com</string>
+    <string name="paginaweb">Página web</string>
 </resources>
