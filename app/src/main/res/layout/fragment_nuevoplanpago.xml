@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"/>
+                <EditText
+                    android:id="@+id/txtNombre"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo"/>
+                <Spinner
+                    android:id="@+id/spTipo"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="F. Inicio"/>
+                <EditText
+                    android:id="@+id/txtFecInicio"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Frec. Pago"/>
+                <Spinner
+                    android:id="@+id/spFecPago"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tasa Desc."/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtTasaDescuento"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivTasaDescuento"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%Estruct."/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtPorcEstructuracion"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivPorcEstructuracion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%Colocac."/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtColocacion"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivColocacion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%Flotación"/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtFlotacion"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivFlotacion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%CAVALI"/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtCAVALI"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivCAVALI"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%Inflación"/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtInflacion"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivInflacion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="%TEP"/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtTEP"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivTEP"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="P.Gracia"/>
+                <EditText
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:inputType="number"
+                    android:id="@+id/txtPGracia"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivPGracia"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pregunta" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar Plan de Pago"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -5,5 +5,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:typeface">serif</item>
+
+        <item name="android:textViewStyle">@style/RobotoGlobalStyle</item>
+        <item name="android:spinnerItemStyle">@style/RobotoGlobalStyle</item>
+        <item name="android:editTextStyle">@style/RobotoGlobalStyle</item>
+        <item name="android:listViewStyle">@style/RobotoGlobalStyle</item>
+        <item name="android:button">@style/RobotoGlobalStyle</item>
+    </style>
+
+    <style name="RobotoGlobalStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 </resources>

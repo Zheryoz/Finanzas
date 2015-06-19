@@ -16,6 +16,7 @@ import pe.edu.finanzas.finanzas.accounts.AccountUtils;
 import pe.edu.finanzas.finanzas.fragments.MiCuentaFragment;
 import pe.edu.finanzas.finanzas.fragments.MisPlanesFragment;
 import pe.edu.finanzas.finanzas.fragments.NavigationDrawerFragment;
+import pe.edu.finanzas.finanzas.fragments.NuevoPlanPagoFragment;
 
 
 public class InicioActivity extends AppCompatActivity
@@ -54,7 +55,7 @@ public class InicioActivity extends AppCompatActivity
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                        .replace(R.id.container, new NuevoPlanPagoFragment())
                         .commit();
                 break;
             case 3:
