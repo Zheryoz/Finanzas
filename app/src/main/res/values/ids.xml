@@ -9,4 +9,5 @@
     <item name="tv_telefono" type="id" />
     <item name="tv_correo" type="id" />
     <item name="tv_web" type="id" />
+    <item name="register" type="id" />
 </resources>

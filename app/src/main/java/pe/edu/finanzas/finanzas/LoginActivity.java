@@ -2,6 +2,7 @@ package pe.edu.finanzas.finanzas;
 
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import pe.edu.finanzas.finanzas.restclient.FinanzasRestContract;
  */
 public class LoginActivity extends AccountAuthenticatorActivity {
 
+    private final static int REQ_REGISTER = 10;
     private EditText mUserView;
     private EditText mPasswordView;
 
@@ -40,6 +42,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivityForResult(intent, REQ_REGISTER);
             }
         });
     }
