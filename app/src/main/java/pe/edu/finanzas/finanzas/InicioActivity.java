@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pe.edu.finanzas.finanzas.accounts.AccountUtils;
+import pe.edu.finanzas.finanzas.fragments.MiCuentaFragment;
+import pe.edu.finanzas.finanzas.fragments.MisPlanesFragment;
 import pe.edu.finanzas.finanzas.fragments.NavigationDrawerFragment;
 
 
@@ -26,13 +28,10 @@ public class InicioActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
         if (AccountUtils.newInstance(this).existsAccount()) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -42,9 +41,27 @@ public class InicioActivity extends AppCompatActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        switch(position){
+            case 0:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new MiCuentaFragment())
+                        .commit();
+                break;
+            case 1:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new MisPlanesFragment())
+                        .commit();
+                break;
+            case 2:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 3:
+                Intent myIntent = new Intent(this, LoginActivity.class);
+                startActivity(myIntent);
+                break;
+        }
     }
 
     @Override
