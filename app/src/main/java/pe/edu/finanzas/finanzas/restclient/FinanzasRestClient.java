@@ -1,6 +1,5 @@
 package pe.edu.finanzas.finanzas.restclient;
 
-import com.tismart.tsmlibrary.rest.RestClient;
 import com.tismart.tsmlibrary.rest.enums.AmbienteEnum;
 
 /**
@@ -13,9 +12,9 @@ public class FinanzasRestClient extends RestClient {
     private FinanzasRestClient() {
         super();
         ambienteEnum = AmbienteEnum.DESARROLLO;
-        DES_URL = "";
-        QA_URL = "";
-        PRD_URL = "";
+        DES_URL = "http://planespago.somee.com/api";
+        QA_URL = "http://planespago.somee.com/api";
+        PRD_URL = "http://planespago.somee.com/api";
     }
 
     public static FinanzasRestClient getInstance() {

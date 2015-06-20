@@ -2,24 +2,25 @@ package pe.edu.finanzas.finanzas;
 
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.tismart.tsmlibrary.rest.enums.ResponseCode;
-import com.tismart.tsmlibrary.rest.exceptions.NetworkException;
-import com.tismart.tsmlibrary.rest.interfaces.RestCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pe.edu.finanzas.finanzas.accounts.AccountUtils;
+import pe.edu.finanzas.finanzas.restclient.RestClient;
+import pe.edu.finanzas.finanzas.restclient.RestCallback;
 import pe.edu.finanzas.finanzas.restclient.FinanzasRestClient;
-import pe.edu.finanzas.finanzas.restclient.FinanzasRestContract;
-
 
 /**
  * A login screen that offers login via email/password.
@@ -29,6 +30,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private final static int REQ_REGISTER = 10;
     private EditText mUserView;
     private EditText mPasswordView;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             focusView = mPasswordView;
             cancel = true;
         }
-
         if (TextUtils.isEmpty(user)) {
             mUserView.setError(getString(R.string.error_field_required));
             focusView = mUserView;
@@ -82,18 +83,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            JSONObject jsonObject = new JSONObject();
             try {
-                jsonObject.put(FinanzasRestContract.IniciarSesionContract.RequestContract.USERNAME, user);
-                jsonObject.put(FinanzasRestContract.IniciarSesionContract.RequestContract.PASSWORD, password);
-            } catch (JSONException jsone) {
-                jsone.printStackTrace();
-            }
-            try {
-                FinanzasRestClient.getInstance().postAsync(this, FinanzasRestContract.SERVICE, FinanzasRestContract.IniciarSesionContract.METHOD, jsonObject, new RestCallback() {
-
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("Email", user);
+                jsonObject.put("Contrasena", password);
+                FinanzasRestClient.getInstance().postAsync(this, "/Usuario", "/Ingresar", jsonObject, new RestCallback() {
                     ProgressDialog progress;
-
                     @Override
                     public void OnStart() {
                         if (progress == null) {
@@ -104,21 +99,37 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     }
 
                     @Override
-                    public void OnResponse(ResponseCode responseCode, JSONObject jsonObject) {
+                    public void OnResponse(ResponseCode var1, String var2) {
                         progress.dismiss();
-                        AccountUtils.newInstance(LoginActivity.this).addAccount(user, password, null);
-                        setAccountAuthenticatorResult(null);
-                        finish();
+                        if(var2=="") {
+                            new AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle("Validación fallida!")
+                                    .setMessage("Usuario y/o contraseña inválida, por favor intentelo nuevamente.")
+                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }else {
+                            pref = getApplicationContext().getSharedPreferences("LoginDATA", 0);
+                            SharedPreferences.Editor editor = pref.edit();
+
+                            Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
+                            startActivity(intent);
+
+                        }
                     }
                 });
-            } catch (NetworkException ne) {
-                ne.printStackTrace();
+           } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
 
     private boolean isEmailValid(String email) {
-        return !email.contains("@");
+        return email.contains("@") && email.contains(".");
     }
 
     private boolean isPasswordValid(String password) {
