@@ -4,6 +4,7 @@
     <string name="prompt_user">Usuario</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>
+    <string name="register">Registrar</string>
 
     <string name="error_invalid_email">El usuario es inválido</string>
     <string name="error_invalid_password">La contraseña es muy corta</string>
