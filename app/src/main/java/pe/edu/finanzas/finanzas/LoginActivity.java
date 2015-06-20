@@ -113,9 +113,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                     .show();
                         }else {
-                            pref = getApplicationContext().getSharedPreferences("LoginDATA", 0);
-                            SharedPreferences.Editor editor = pref.edit();
-
+                            try{
+                                JSONObject jObject = new JSONObject(var2);
+                                pref = getApplicationContext().getSharedPreferences("LoginDATA", 0);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("UsuarioId", String.valueOf(jObject.getJSONObject("UsuarioId")));
+                                editor.putString("Nombre", String.valueOf(jObject.getJSONObject("Nombre")));
+                                editor.putString("Email", String.valueOf(jObject.getJSONObject("Email")));
+                            }catch(Exception ex) {
+                                ex.printStackTrace();
+                            }
                             Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
                             startActivity(intent);
 
