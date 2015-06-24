@@ -1,10 +1,10 @@
 <resources>
 
     <!-- Strings related to login -->
-    <string name="prompt_user">Usuario</string>
+    <string name="prompt_user">Correo</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="action_sign_in">Iniciar sesión</string>
-    <string name="register">Registrar</string>
+    <string name="action_sign_in">ENTRAR</string>
+    <string name="register">REGISTRAR</string>
 
     <string name="error_invalid_email">El usuario es inválido</string>
     <string name="error_invalid_password">La contraseña es muy corta</string>
@@ -12,5 +12,5 @@
     <string name="error_field_required">Este campo es requerido</string>
 
     <string name="iniciando_sesion">Iniciando sesión</string>
-    <string name="mensaje_iniciando_sesion">Estamos validando su usuario y contraseña</string>
+    <string name="mensaje_iniciando_sesion">Estamos validando su correo y contraseña</string>
 </resources>

@@ -1,11 +1,12 @@
 package pe.edu.finanzas.finanzas;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 
-public class RegistroActivity extends ActionBarActivity {
+public class RegistroActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +17,6 @@ public class RegistroActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
 }

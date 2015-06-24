@@ -7,6 +7,7 @@ android {
     defaultConfig {
         applicationId "pe.edu.finanzas.finanzas"
         minSdkVersion 16
+
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"

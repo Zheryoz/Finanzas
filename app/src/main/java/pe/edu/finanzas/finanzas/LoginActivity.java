@@ -1,6 +1,6 @@
 package pe.edu.finanzas.finanzas;
 
-import android.accounts.AccountAuthenticatorActivity;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,21 +11,18 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.tismart.tsmlibrary.rest.enums.ResponseCode;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import pe.edu.finanzas.finanzas.restclient.RestClient;
 import pe.edu.finanzas.finanzas.restclient.RestCallback;
 import pe.edu.finanzas.finanzas.restclient.FinanzasRestClient;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AccountAuthenticatorActivity {
+public class LoginActivity extends Activity {
 
     private final static int REQ_REGISTER = 10;
     private EditText mUserView;
