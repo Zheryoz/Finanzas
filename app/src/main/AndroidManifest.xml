@@ -25,22 +25,14 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".accounts.FinanzasAuthenticatorService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/user_authenticator" />
-        </service>
-
         <activity
             android:name=".AcercaActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".RegistroActivity" />
+
+        <activity
+            android:name=".RegistroActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".ContactenosActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

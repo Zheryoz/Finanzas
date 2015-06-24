@@ -26,4 +26,9 @@
     <string name="email_contacto">Correo electrónico</string>
     <string name="paginaweb_texto">www.plandepago.com</string>
     <string name="paginaweb">Página web</string>
+
+    <string name="nombre_apellido">Nombres y/o Apellidos</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="clave">Contraseña</string>
+    <string name="registrar">REGISTRAR</string>
 </resources>

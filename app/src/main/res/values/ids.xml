@@ -10,4 +10,8 @@
     <item name="tv_correo" type="id" />
     <item name="tv_web" type="id" />
     <item name="register" type="id" />
+    <item name="txtNombres" type="id" />
+    <item name="txtCorreo" type="id" />
+    <item name="txtClave" type="id" />
+    <item name="btnRegistrar" type="id" />
 </resources>
