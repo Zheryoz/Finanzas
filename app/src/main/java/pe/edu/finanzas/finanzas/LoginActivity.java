@@ -101,7 +101,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     @Override
                     public void OnResponse(ResponseCode var1, String var2) {
                         progress.dismiss();
-                        if(var2=="") {
+                        if(var2.equals("")) {
                             new AlertDialog.Builder(LoginActivity.this)
                                     .setTitle("Validación fallida!")
                                     .setMessage("Usuario y/o contraseña inválida, por favor intentelo nuevamente.")
@@ -125,7 +125,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                             }
                             Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
                             startActivity(intent);
-
                         }
                     }
                 });
