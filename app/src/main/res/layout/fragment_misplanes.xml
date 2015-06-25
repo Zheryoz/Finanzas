@@ -12,11 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <Button
+            style="@style/RobotoButtonStyle"
             android:id="@+id/btnNuevoPlanPago"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Crear nuevo plan de pago"/>
         <android.support.v7.widget.RecyclerView
+            android:paddingTop="16dp"
             android:id="@+id/rvMisPlanes"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"/>

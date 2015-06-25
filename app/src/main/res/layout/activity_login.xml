@@ -6,10 +6,12 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
         android:contentDescription="@null"
-        android:src="@android:color/black" />
+        android:scaleType="fitXY"
+        android:src="@drawable/finanzas" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                 android:id="@id/password"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:hint="@string/prompt_password"
@@ -53,17 +55,17 @@
                 app:typeface="regular" />
 
             <Button
+                style="@style/RobotoButtonStyle"
                 android:id="@id/signin"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in" />
 
             <Button
+                style="@style/RobotoButtonStyle"
                 android:id="@id/register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/register" />
 
         </LinearLayout>

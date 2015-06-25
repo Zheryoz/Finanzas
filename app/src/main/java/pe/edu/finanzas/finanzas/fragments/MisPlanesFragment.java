@@ -25,8 +25,8 @@ import pe.edu.finanzas.finanzas.libraries.RecyclerItemClickListener;
  */
 public class MisPlanesFragment extends Fragment implements RecyclerItemClickListener.OnItemClickListener{
 
-    Button btnNuevoPlanPago;
-    RecyclerView rvMisPlanes;
+    private Button btnNuevoPlanPago;
+    private RecyclerView rvMisPlanes;
 
     public MisPlanesFragment() {
     }

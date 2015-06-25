@@ -16,6 +16,7 @@ import com.tismart.tsmlibrary.rest.enums.ResponseCode;
 
 import org.json.JSONObject;
 
+import pe.edu.finanzas.finanzas.libraries.Funciones;
 import pe.edu.finanzas.finanzas.restclient.RestCallback;
 import pe.edu.finanzas.finanzas.restclient.FinanzasRestClient;
 
@@ -24,10 +25,8 @@ import pe.edu.finanzas.finanzas.restclient.FinanzasRestClient;
  */
 public class LoginActivity extends Activity {
 
-    private final static int REQ_REGISTER = 10;
     private EditText mUserView;
     private EditText mPasswordView;
-    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +39,19 @@ public class LoginActivity extends Activity {
         findViewById(R.id.signin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                ValidarUsuario();
             }
         });
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivityForResult(intent, REQ_REGISTER);
+                startActivity(intent);
             }
         });
     }
 
-    public void attemptLogin() {
+    public void ValidarUsuario() {
         mUserView.setError(null);
         mPasswordView.setError(null);
 
@@ -62,16 +61,12 @@ public class LoginActivity extends Activity {
         boolean cancel = false;
         View focusView = null;
 
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
-        if (TextUtils.isEmpty(user)) {
-            mUserView.setError(getString(R.string.error_field_required));
-            focusView = mUserView;
-            cancel = true;
-        } else if (!isEmailValid(user)) {
+        if (TextUtils.isEmpty(user) || !isEmailValid(user)) {
             mUserView.setError(getString(R.string.error_invalid_email));
             focusView = mUserView;
             cancel = true;
@@ -111,12 +106,7 @@ public class LoginActivity extends Activity {
                                     .show();
                         }else {
                             try{
-                                JSONObject jObject = new JSONObject(var2);
-                                pref = getApplicationContext().getSharedPreferences("LoginDATA", 0);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("UsuarioId", String.valueOf(jObject.getJSONObject("UsuarioId")));
-                                editor.putString("Nombre", String.valueOf(jObject.getJSONObject("Nombre")));
-                                editor.putString("Email", String.valueOf(jObject.getJSONObject("Email")));
+                                Funciones.GuardarLogin(getApplicationContext(), new JSONObject(var2));
                             }catch(Exception ex) {
                                 ex.printStackTrace();
                             }
@@ -125,18 +115,18 @@ public class LoginActivity extends Activity {
                         }
                     }
                 });
-           } catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     private boolean isEmailValid(String email) {
-        return email.contains("@") && email.contains(".");
+        return email.contains("@") && email.contains(".") && !email.contains(" ");
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.trim().length() > 4;
     }
 
     @Override

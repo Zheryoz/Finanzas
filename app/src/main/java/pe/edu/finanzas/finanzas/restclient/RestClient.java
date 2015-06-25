@@ -144,9 +144,7 @@ public abstract class RestClient {
             out.close();
             BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
             wsresponse.responseCode = ResponseCode.valueOf(urlConnection.getResponseCode());
-            if(wsresponse.responseCode.equals(ResponseCode.HTTP_OK)) {
-                wsresponse.response = this.convertStreamToString(in);
-            }
+            wsresponse.response = this.convertStreamToString(in);
         } finally {
             urlConnection.disconnect();
         }

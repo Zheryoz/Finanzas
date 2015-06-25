@@ -10,6 +10,9 @@ public class Usuario {
     public String Nombre;
     public int RolId;
 
+    public Usuario(){
+
+    }
     public Usuario(int id, String email, String nombre, int rol){
         this.UsuarioId = id;
         this.Email = email;

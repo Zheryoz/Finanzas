@@ -1,6 +1,7 @@
 package pe.edu.finanzas.finanzas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import pe.edu.finanzas.finanzas.fragments.MiCuentaFragment;
 import pe.edu.finanzas.finanzas.fragments.MisPlanesFragment;
 import pe.edu.finanzas.finanzas.fragments.NavigationDrawerFragment;
 import pe.edu.finanzas.finanzas.fragments.NuevoPlanPagoFragment;
+import pe.edu.finanzas.finanzas.libraries.Funciones;
 
 
 public class InicioActivity extends AppCompatActivity
@@ -29,6 +31,10 @@ public class InicioActivity extends AppCompatActivity
         setContentView(R.layout.activity_inicio);
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        if(Funciones.ObtenerUsuarioLogueado(getApplicationContext())==null){
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
+        }
     }
 
     @Override
@@ -51,6 +57,7 @@ public class InicioActivity extends AppCompatActivity
                         .commit();
                 break;
             case 3:
+                Funciones.EliminarUsuarioLogueado(getApplicationContext());
                 Intent myIntent = new Intent(this, LoginActivity.class);
                 startActivity(myIntent);
                 break;
