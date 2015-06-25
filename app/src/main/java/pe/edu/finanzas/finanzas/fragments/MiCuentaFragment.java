@@ -49,17 +49,16 @@ public class MiCuentaFragment extends Fragment {
         txtClave = (EditText)getView().findViewById(R.id.txtClave);
         txtClave.setText("----------------");
         btnGuardar = (Button)getView().findViewById(R.id.btnGuardar);
-        btnGuardar.setOnTouchListener(new View.OnTouchListener() {
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
+            public void onClick(View v) {
             }
         });
         btnSincronizar = (Button)getView().findViewById(R.id.btnSincronizar);
-        btnSincronizar.setOnTouchListener(new View.OnTouchListener() {
+        btnSincronizar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
+            public void onClick(View v) {
+                Funciones.Sincronizar(getActivity());
             }
         });
     }

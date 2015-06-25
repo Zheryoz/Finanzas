@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.tismart.tsmlibrary.rest.ConnectionUtil;
 import com.tismart.tsmlibrary.rest.enums.ResponseCode;
 
 import org.json.JSONObject;
@@ -88,6 +89,10 @@ public class RegistroActivity extends Activity {
         if (cancel) {
             focusView.requestFocus();
         }else{
+            if(!ConnectionUtil.isNetworkAvailable(this)){
+                Funciones.AlertaSinInternet(this);
+                return;
+            }
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("NombreUsuario", nombre);

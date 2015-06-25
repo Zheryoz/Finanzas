@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 
+import com.tismart.tsmlibrary.rest.ConnectionUtil;
 import com.tismart.tsmlibrary.rest.enums.ResponseCode;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,13 +34,18 @@ public final class Funciones {
     }
 
     public static void SINCR_PlanPago(final Context context) {
+        if(!ConnectionUtil.isNetworkAvailable(context)){
+            Funciones.AlertaSinInternet(context);
+            return;
+        }
         try {
-            FinanzasRestClient.getInstance().postAsync(context, "/Usuario", "/Ingresar", null, new RestCallback() {
+            FinanzasRestClient.getInstance().getAsync(context, "/PlanPago", "/ObtenerPorUsuario?usuarioId=" + String.valueOf(Funciones.ObtenerUsuarioLogueado(context).UsuarioId) + "&pagina=0", new RestCallback() {
                 ProgressDialog progress;
+
                 @Override
                 public void OnStart() {
                     if (progress == null) {
-                        progress = ProgressDialog.show(context,"Sincronizando...", "Descargando sus planes de pago.", true);
+                        progress = ProgressDialog.show(context, "Sincronizando...", "Descargando sus planes de pago.", true);
                         progress.setCancelable(false);
                         progress.setCanceledOnTouchOutside(false);
                     }
@@ -47,15 +54,18 @@ public final class Funciones {
                 @Override
                 public void OnResponse(ResponseCode var1, String var2) {
                     progress.dismiss();
-                    if(var2.equals("")) {
-                        Funciones.AlertaSincrFallida(context);
-                    }else {
-                        try{
-                            JSONObject result = new JSONObject(var2);
-                            AlertaSincrExitosa(context);
-                        }catch(Exception ex) {
-                            Funciones.AlertaSincrFallida(context);
+                    try {
+                        if(!var2.equals("")){
+                            JSONArray result = new JSONArray(var2);
+                            for(int i=0;i<result.length();i++){
+                                JSONObject subResult = new JSONObject(result.get(i).toString());
+                                PlanPago objINS = new PlanPago(subResult.getInt("PlanPagoId"),subResult.getString("Nombre"),subResult.getInt("TipoPlanPagoId"),subResult.getInt("MetodoId"),subResult.getInt("UsuarioId"));
+                                Funciones.INS_PlanPago(context,objINS);
+                            }
                         }
+                        Funciones.AlertaSincrExitosa(context);
+                    } catch (Exception ex) {
+                        Funciones.AlertaSincrFallida(context);
                     }
                 }
             });
@@ -64,13 +74,18 @@ public final class Funciones {
         }
     }
     public static void SINCR_Metodo(final Context context) {
+        if(!ConnectionUtil.isNetworkAvailable(context)){
+            Funciones.AlertaSinInternet(context);
+            return;
+        }
         try {
-            FinanzasRestClient.getInstance().postAsync(context, "/Metodo", "/ObtenerTodos", null, new RestCallback() {
+            FinanzasRestClient.getInstance().getAsync(context, "/Metodo", "/ObtenerTodos", new RestCallback() {
                 ProgressDialog progress;
+
                 @Override
                 public void OnStart() {
                     if (progress == null) {
-                        progress = ProgressDialog.show(context,"Sincronizando...", "Descargando metodos de pago disponibles.", true);
+                        progress = ProgressDialog.show(context, "Sincronizando...", "Descargando metodos de pago disponibles.", true);
                         progress.setCancelable(false);
                         progress.setCanceledOnTouchOutside(false);
                     }
@@ -79,13 +94,18 @@ public final class Funciones {
                 @Override
                 public void OnResponse(ResponseCode var1, String var2) {
                     progress.dismiss();
-                    if(var2.equals("")) {
+                    if (var2.equals("")) {
                         Funciones.AlertaSincrFallida(context);
-                    }else {
-                        try{
-                            JSONObject result = new JSONObject(var2);
+                    } else {
+                        try {
+                            JSONArray result = new JSONArray(var2);
+                            for(int i=0;i<result.length();i++){
+                                JSONObject subResult = new JSONObject(result.get(i).toString());
+                                Metodo objINS = new Metodo(subResult.getInt("MetodoId"),subResult.getString("Nombre"),subResult.getString("Descripcion"));
+                                Funciones.INS_Metodo(context,objINS);
+                            }
                             Funciones.SINCR_PlanPago(context);
-                        }catch(Exception ex) {
+                        } catch (Exception ex) {
                             Funciones.AlertaSincrFallida(context);
                         }
                     }
@@ -96,8 +116,12 @@ public final class Funciones {
         }
     }
     public static void SINCR_TipoPlanPago(final Context context) {
+        if(!ConnectionUtil.isNetworkAvailable(context)){
+            Funciones.AlertaSinInternet(context);
+            return;
+        }
         try {
-            FinanzasRestClient.getInstance().postAsync(context, "/PlanPago", "/Agregar", null, new RestCallback() {
+            FinanzasRestClient.getInstance().getAsync(context, "/TipoPlanPago", "/ObtenerTodos", new RestCallback() {
                 ProgressDialog progress;
                 @Override
                 public void OnStart() {
@@ -115,7 +139,12 @@ public final class Funciones {
                         Funciones.AlertaSincrFallida(context);
                     }else {
                         try{
-                            JSONObject result = new JSONObject(var2);
+                            JSONArray result = new JSONArray(var2);
+                            for(int i=0;i<result.length();i++){
+                                JSONObject subResult = new JSONObject(result.get(i).toString());
+                                TipoPlanPago objINS = new TipoPlanPago(subResult.getInt("TipoPlanPagoId"),subResult.getString("Nombre"));
+                                Funciones.INS_TipoPlanPago(context,objINS);
+                            }
                             Funciones.SINCR_Metodo(context);
                         }catch(Exception ex) {
                             Funciones.AlertaSincrFallida(context);
@@ -128,6 +157,18 @@ public final class Funciones {
         }
     }
 
+    public static void AlertaSinInternet(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("Sin conexión!")
+                .setMessage("Por favor, revise su conexión a internet.")
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
     public static void AlertaSincrFallida(Context context) {
         new AlertDialog.Builder(context)
                 .setTitle("Sincronización Fallida!")
@@ -163,11 +204,11 @@ public final class Funciones {
     public static void INS_PlanPago(Context context, PlanPago objINS) {
         SQLiteHelper myDB = SQLiteHelper.getDatabase(context);
         String query = "INSERT INTO PlanPago(PlanPagoId,Nombre,TipoPlanPagoId,MetodoId,UsuarioId) VALUES([{0}],'[{1}]',[{2}],[{3}],[{4}]);";
-        query.replace("[{0}]",String.valueOf(objINS.PlanPagoId));
-        query.replace("[{1}]",objINS.Nombre);
-        query.replace("[{2}]",String.valueOf(objINS.TipoPlanPagoId));
-        query.replace("[{3}]",String.valueOf(objINS.MetodoId));
-        query.replace("[{4}]",String.valueOf(objINS.UsuarioId));
+        query = query.replace("[{0}]",String.valueOf(objINS.PlanPagoId));
+        query = query.replace("[{1}]",objINS.Nombre);
+        query = query.replace("[{2}]",String.valueOf(objINS.TipoPlanPagoId));
+        query = query.replace("[{3}]",String.valueOf(objINS.MetodoId));
+        query = query.replace("[{4}]",String.valueOf(objINS.UsuarioId));
         myDB.myDataBase.execSQL(query);
     }
     public static List<PlanPago> SEL_PlanPago(Context context) {
@@ -186,9 +227,9 @@ public final class Funciones {
     public static void INS_Metodo(Context context, Metodo objINS) {
         SQLiteHelper myDB = SQLiteHelper.getDatabase(context);
         String query = "INSERT INTO Metodo(MetodoId,Nombre,Descripcion) VALUES([{0}],'[{1}]','[{2}]');";
-        query.replace("[{0}]",String.valueOf(objINS.MetodoId));
-        query.replace("[{1}]",objINS.Nombre);
-        query.replace("[{2}]",objINS.Descripcion);
+        query = query.replace("[{0}]",String.valueOf(objINS.MetodoId));
+        query = query.replace("[{1}]",objINS.Nombre);
+        query = query.replace("[{2}]",objINS.Descripcion);
         myDB.myDataBase.execSQL(query);
     }
     public static List<Metodo> SEL_Metodo(Context context) {
@@ -207,8 +248,8 @@ public final class Funciones {
     public static void INS_TipoPlanPago(Context context, TipoPlanPago objINS) {
         SQLiteHelper myDB = SQLiteHelper.getDatabase(context);
         String query = "INSERT INTO TipoPlanPago(TipoPlanPagoId,Nombre) VALUES([{0}],'[{1}]');";
-        query.replace("[{0}]",String.valueOf(objINS.TipoPlanPagoId));
-        query.replace("[{1}]",objINS.Nombre);
+        query = query.replace("[{0}]",String.valueOf(objINS.TipoPlanPagoId));
+        query = query.replace("[{1}]", objINS.Nombre);
         myDB.myDataBase.execSQL(query);
     }
     public static List<TipoPlanPago> SEL_TipoPlanPago(Context context) {

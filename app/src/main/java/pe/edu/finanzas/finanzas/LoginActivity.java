@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.tismart.tsmlibrary.rest.ConnectionUtil;
 import com.tismart.tsmlibrary.rest.enums.ResponseCode;
 
 import org.json.JSONObject;
@@ -76,6 +77,10 @@ public class LoginActivity extends Activity {
         if (cancel) {
             focusView.requestFocus();
         } else {
+            if(!ConnectionUtil.isNetworkAvailable(this)){
+                Funciones.AlertaSinInternet(this);
+                return;
+            }
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("Email", user);

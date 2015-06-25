@@ -21,11 +21,17 @@ import java.util.List;
 import java.util.Locale;
 
 import pe.edu.finanzas.finanzas.R;
+import pe.edu.finanzas.finanzas.entities.Metodo;
+import pe.edu.finanzas.finanzas.entities.TipoPlanPago;
+import pe.edu.finanzas.finanzas.libraries.Funciones;
 
 /**
  * Created by francisco on 6/19/15.
  */
 public class NuevoPlanPagoFragment extends Fragment {
+
+    private List<TipoPlanPago> lstTipoPlanPago;
+    private List<Metodo> lstMetodo;
 
     public TextView txtNombre;
     public Spinner spTipo;
@@ -51,10 +57,6 @@ public class NuevoPlanPagoFragment extends Fragment {
 
     private DatePickerDialog fecInicioPickerDialog;
     private SimpleDateFormat dateFormatter;
-
-
-    public NuevoPlanPagoFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,14 +88,23 @@ public class NuevoPlanPagoFragment extends Fragment {
         txtPGracia = (TextView)getView().findViewById(R.id.txtPGracia);
         ivPGracia = (ImageView)getView().findViewById(R.id.ivPGracia);
         btnGuardar = (Button)getView().findViewById(R.id.btnGuardar);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         setDateTimeField();
 
+        lstTipoPlanPago = Funciones.SEL_TipoPlanPago(getActivity());
+        lstMetodo = Funciones.SEL_Metodo(getActivity());
+
         List<String> lstTipo = new ArrayList<>();
         lstTipo.add("-= Seleccione =-");
-        lstTipo.add("Bono Corporativo");
-        lstTipo.add("Bono VAC");
+        for(int i=0;i<lstTipoPlanPago.size();i++){
+            lstTipo.add(lstTipoPlanPago.get(i).Nombre);
+        }
         List<String> lstFrecuencia = new ArrayList<>();
         lstFrecuencia.add("-= Seleccione =-");
         lstFrecuencia.add("Diario");
