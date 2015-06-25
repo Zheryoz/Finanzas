@@ -34,6 +34,8 @@ public class InicioActivity extends AppCompatActivity
         if(Funciones.ObtenerUsuarioLogueado(getApplicationContext())==null){
             Intent myIntent = new Intent(this, LoginActivity.class);
             startActivity(myIntent);
+        }else {
+            Funciones.Sincronizar(this);
         }
     }
 
